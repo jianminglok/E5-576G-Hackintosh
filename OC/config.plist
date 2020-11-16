@@ -534,19 +534,6 @@
 				<key>model</key>
 				<string>Intel Sunrise Point-LP PMC</string>
 			</dict>
-			<key>PciRoot(0x0)/Pci(0x1f,0x3)</key>
-			<dict>
-				<key>AAPL,slot-name</key>
-				<string>Internal</string>
-				<key>hda-gfx</key>
-				<string>onboard-1</string>
-				<key>hda-idle-support</key>
-				<string>1</string>
-				<key>layout-id</key>
-				<integer>31</integer>
-				<key>model</key>
-				<string>Intel Sunrise Point-LP HD Audio</string>
-			</dict>
 			<key>PciRoot(0x0)/Pci(0x1f,0x4)</key>
 			<dict>
 				<key>AAPL,slot-name</key>
@@ -558,6 +545,11 @@
 			<dict>
 				<key>built-in</key>
 				<data>AQ==</data>
+			</dict>
+			<key>PciRoot(0x0)/Pci(0x1f,0x3)</key>
+			<dict>
+				<key>layout-id</key>
+				<data>HwAAAA==</data>
 			</dict>
 		</dict>
 		<key>Delete</key>
@@ -1356,7 +1348,7 @@
 			<key>ScanPolicy</key>
 			<integer>0</integer>
 			<key>SecureBootModel</key>
-			<string>Default</string>
+			<string>Disabled</string>
 			<key>Vault</key>
 			<string>Optional</string>
 		</dict>
