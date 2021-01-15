@@ -1,7 +1,7 @@
 
 # Acer Aspire E 15 E5-576G Hackintosh
 
-macOS Catalina/Big Sur Beta on Acer E5-576G
+macOS Catalina/Big Sur on Acer E5-576G
 
 ## Configuration
 
@@ -17,14 +17,13 @@ macOS Catalina/Big Sur Beta on Acer E5-576G
 
 ## Current Status in OpenCore
 
-- In macOS 10.15, you need to update [Wireless-USB-Adapter Driver](https://github.com/chris1111/Wireless-USB-Adapter-Clover/releases)
 - Discrete graphic card is not working, since macOS doesn't support Optimus technology
   - Have used [SSDT-DGPU](EFI/OC/ACPI/SSDT-DGPU.dsl) to disable it in order to save power
 - Intel Bluetooth may cause sleep problems and does not support some Bluetooth devices
   - View [Work-Around-with-Bluetooth](https://github.com/daliansky/XiaoMi-Pro/wiki/Work-Around-with-Bluetooth) (Untested)
 - Intel Wi-Fi(Intel Wireless 3165) is working
   - Buy a USB Wi-Fi dongle or supported wireless card
-  - Use [itlwm](https://github.com/OpenIntelWireless/itlwm) and [HeliPort](https://github.com/OpenIntelWireless/HeliPort) to drive Intel Wi-Fi
+  - Use [AirportItlwm](https://github.com/OpenIntelWireless/itlwm) to enable Intel Wi-Fi
 - Using a HDMI-VGA adapter to connect an external monitor causes lag and black screen for unknown reason, but using either a HDMI-HDMI or VGA-VGA direct connection is fine.
 - Everything else should work well
 
@@ -41,9 +40,10 @@ macOS Catalina/Big Sur Beta on Acer E5-576G
 - If you intend to dual boot Windows on the same drive, it is recommended that you install Windows **first**, and then resizing the EFI System Partition (ESP) too at least 200MB with any partition assistant you like (but avoid GParted). 
 - If there's any partition to the left of the Windows partition which you would have to shrink to extend the ESP, move it to the **right** side of the Windows partition so you can successfully resize the ESP.
 - It is highly recommended that you use [ProperTree](https://github.com/corpnewt/ProperTree) to make any changes to the config.plist in `\EFI\OC`, otherwise you may corrupt the file.
-- Add `BOOT` and `OC` folders to your EFI partition. Add `refind` folder to if you require dual boot with Windows. 
+- Add `BOOT` and `OC` folders to your EFI partition.
 - As our laptop is only boots from `\EFI\Microsoft\Boot\bootmgfw.efi` (or maybe not, I didn't bother to mess with the EFI boot map just yet), you will have to rename `\EFI\Microsoft\Boot\bootmgfw.efi` to `\EFI\Microsoft\Boot\bootmgfw-orig.efi` and copy `\EFI\refind\refind.efi` to \EFI\Microsoft\Boot and rename it as `\EFI\Microsoft\Boot\bootmgfw.efi` so you will see the refind boot picker every time.
-- It is no longer required to rename `\EFI\Microsoft\Boot\bootmgfw.efi` to `\EFI\Microsoft\Boot\bootmgfw-orig.efi` from OC 0.5.8. Instead, we will use the new Bootstrap option in OC 0.5.8 to prevent Windows from replacing `\EFI\Microsoft\Boot\bootmgfw.efi` which is actually copied from `\EFI\refind\refind.efi` every time during updates. To do so, we first rename `\EFI\OC\Boostrap\Bootstrap.efi` to `\EFI\OC\Boostrap\Bootstrap-orig.efi`, then copy `\EFI\refind\refind.efi` to `\EFI\OC\Bootstrap` and rename it as `\EFI\OC\Boostrap\Bootstrap.efi`. However, any downsides of using this method is yet to be known and long-term stability has not been tested yet so proceed at your own risk.
+- It is no longer required to rename `\EFI\Microsoft\Boot\bootmgfw.efi` to `\EFI\Microsoft\Boot\bootmgfw-orig.efi` from OC 0.5.8. Instead, we will use the new Bootstrap option in OC 0.5.8 to prevent Windows from replacing `\EFI\Microsoft\Boot\bootmgfw.efi`.
+- For users with the E5-576G-59S6, please remove `\EFI\OC\ACPI\SSDT-TPDE.aml` and keep `\EFI\OC\ACPI\SSDT-TPD1.aml`. Also remove `\EFI\OC\config.plist` and rename `\EFI\OC\config_59S6.plist` to `EFI\OC\config.plist` due to issues with the touchpad. Other users of E5-576G will only need to keep `\EFI\OC\ACPI\SSDT-TPDE.aml` and `\EFI\OC\config.plist`, `\EFI\OC\ACPI\SSDT-TPD1.aml` and `\EFI\OC\config_59S6.plist` can be removed, unless a different touchpad patch needs to be made for your mode l too.
 
 ## FAQ
 
